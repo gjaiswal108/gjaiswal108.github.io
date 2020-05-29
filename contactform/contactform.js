@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
     else var str = $(this).serialize();
     var action = $(this).attr('action');
     if( ! action ) {
-      action = 'contactform/contactform.php';
+      action = 'https://gj-chatbox.000webhostapp.com/send-feedback';
     }
     $.ajax({
       type: "POST",
@@ -110,6 +110,12 @@ jQuery(document).ready(function($) {
           $('#errormessage').html(msg);
         }
 
+      },
+      error: function(xhr,result,error){
+          $("#sendmessage").addClass("show");
+          $("#errormessage").removeClass("show");
+          $('.contactForm').find("input, textarea").val("");
+          setTimeout(function(){$("#sendmessage").removeClass("show");},3000);
       }
     });
     return false;
