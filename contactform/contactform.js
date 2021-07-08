@@ -92,18 +92,18 @@ jQuery(document).ready(function($) {
     else var str = $(this).serialize();
     var action = $(this).attr('action');
     if( ! action ) {
-      action = 'https://gj-chatbox.000webhostapp.com/send-feedback';
+      action = 'http://3.14.175.11:3000/send-feedback';
     }
     $.ajax({
       type: "POST",
-      url: action,
-      data: str,
+      url: action + '?' + str,
       success: function(msg) {
         // alert(msg);
         if (msg == 'OK') {
           $("#sendmessage").addClass("show");
           $("#errormessage").removeClass("show");
           $('.contactForm').find("input, textarea").val("");
+          setTimeout(function(){$("#sendmessage").removeClass("show");},3000);
         } else {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
